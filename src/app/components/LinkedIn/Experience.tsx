@@ -1,25 +1,26 @@
 interface ExperienceProps {
-    experience: {
+    experiences: Array<{
+      id: number;
       title: string;
       company: string;
-      description: string;
-      start: string;
-      end: string;
-    };
+      duration: string;
+    }>;
   }
   
-  export default function Experience({ experience }: ExperienceProps) {
+  const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
     return (
-      <div style={{ borderBottom: "1px solid #ddd", marginBottom: "10px", paddingBottom: "10px" }}>
-        <h4>{experience.title}</h4>
-        <p>
-          <strong>{experience.company}</strong>
-        </p>
-        <p>{experience.description}</p>
-        <p>
-          {experience.start} - {experience.end}
-        </p>
+      <div>
+        <h3>Experience</h3>
+        {experiences.map((experience) => (
+          <div key={experience.id}>
+            <h4>{experience.title}</h4>
+            <p>{experience.company}</p>
+            <p>{experience.duration}</p>
+          </div>
+        ))}
       </div>
     );
-  }
+  };
+  
+  export default Experience;
   

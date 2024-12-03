@@ -1,26 +1,23 @@
-interface RepoProps {
+interface GitHubRepoProps {
     repo: {
       id: number;
       name: string;
-      html_url: string;
       description: string;
-      language: string;
+      url: string;
     };
   }
   
-  export default function GitHubRepo({ repo }: RepoProps) {
+  const GitHubRepo: React.FC<GitHubRepoProps> = ({ repo }) => {
     return (
-      <div style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
-        <h3>
-          <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-            {repo.name}
-          </a>
-        </h3>
+      <div>
+        <h3>{repo.name}</h3>
         <p>{repo.description}</p>
-        <p>
-          <strong>Language:</strong> {repo.language}
-        </p>
+        <a href={repo.url} target="_blank" rel="noopener noreferrer">
+          View Repository
+        </a>
       </div>
     );
-  }
+  };
+  
+  export default GitHubRepo;
   
