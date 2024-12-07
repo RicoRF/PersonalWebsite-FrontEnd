@@ -1,25 +1,26 @@
 
 # Frontend Project
 
-This is the frontend of the project that fetches and displays data from the backend API. It uses **Next.js** with **React** to create dynamic web pages for LinkedIn and GitHub profiles.
+This is the frontend of a personal project designed to fetch and display data from a backend API. Built with **Next.js** and **React**, it showcases GitHub and LinkedIn profile information through dynamic, reusable components.
 
 ---
 
 ## Features
 
-- **LinkedIn Data Display**: Fetches and displays user data from the `/linkedin` endpoint of the backend.
-- **GitHub Data Display**: Fetches and displays user repositories and profile data from the `/github` endpoint of the backend.
-- **Reusable Components**: Structured codebase with reusable React components for LinkedIn and GitHub profiles.
+- **LinkedIn Data Display**: Fetches and displays user data (e.g., name, headline, experience) from the `/linkedin` backend endpoint.
+- **GitHub Data Display**: Fetches and displays user profile details (e.g., bio, followers, following) and repositories from the `/github` backend endpoint.
+- **Dynamic Components**: Includes modular React components for LinkedIn and GitHub pages to ensure reusability and scalability.
+- **Responsive Design**: Provides a clean and user-friendly interface for both LinkedIn and GitHub data.
 
 ---
 
 ## Prerequisites
 
-Ensure you have the following installed on your system:
+Ensure your environment includes the following:
 
 - **Node.js**: >= 16.x
 - **npm** or **yarn**
-- Backend running at `http://localhost:8000`
+- Backend API running locally at `http://localhost:8000`
 
 ---
 
@@ -31,13 +32,13 @@ Ensure you have the following installed on your system:
    git clone https://github.com/your-repo/frontend.git
    ```
 
-2. Navigate to the project directory:
+2. Change to the project directory:
 
    ```bash
    cd frontend
    ```
 
-3. Install dependencies:
+3. Install the dependencies:
 
    ```bash
    npm install
@@ -48,7 +49,7 @@ Ensure you have the following installed on your system:
 ## Configuration
 
 1. Create a `.env.local` file in the root directory.
-2. Add the following configuration to set up the backend API URLs:
+2. Add the backend API base URL:
 
    ```env
    NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
@@ -58,19 +59,19 @@ Ensure you have the following installed on your system:
 
 ## Running the Project
 
-To start the development server:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-This will start the frontend on `http://localhost:3000`.
+This will start the frontend application at `http://localhost:3000`.
 
 ---
 
 ## Folder Structure
 
-The project is structured as follows:
+The project structure is organized for scalability and clarity:
 
 ```
 src/
@@ -79,7 +80,7 @@ src/
 │   │   ├── GitHub/
 │   │   │   ├── GitHubProfile.tsx
 │   │   │   ├── GitHubRepo.tsx
-│   │   ├── LinkedIn/
+│   ├── LinkedIn/
 │   │   │   ├── LinkedInProfile.tsx
 │   │   │   ├── Experience.tsx
 │   ├── github/
@@ -96,15 +97,29 @@ src/
 
 ## How to Use
 
-1. **LinkedIn Page**: Navigate to `http://localhost:3000/linkedin` to view the LinkedIn profile and experience.
-2. **GitHub Page**: Navigate to `http://localhost:3000/github` to view GitHub repositories and profile details.
+### LinkedIn Page
+
+1. Navigate to `http://localhost:3000/linkedin`.
+2. View the LinkedIn profile data, including:
+   - Name
+   - Headline
+   - Experience details
+
+### GitHub Page
+
+1. Navigate to `http://localhost:3000/github`.
+2. View the GitHub profile information:
+   - Bio
+   - Followers and following count
+   - Repositories with details like name, description, stars, forks, and primary language
 
 ---
 
 ## Troubleshooting
 
-### CORS Error
-Ensure the backend is configured to allow CORS requests. Add the following middleware to your FastAPI backend:
+### CORS Issues
+
+If you encounter a CORS error, ensure your backend is configured to allow requests from `http://localhost:3000`. For FastAPI, include the following middleware:
 
 ```python
 from fastapi.middleware.cors import CORSMiddleware
@@ -118,8 +133,9 @@ app.add_middleware(
 )
 ```
 
-### Module Not Found
-If you encounter a module not found error, verify that the `paths` in `tsconfig.json` are correctly configured:
+### Module Not Found Errors
+
+Ensure your `tsconfig.json` is configured with the appropriate paths for absolute imports:
 
 ```json
 "baseUrl": ".",
@@ -127,6 +143,14 @@ If you encounter a module not found error, verify that the `paths` in `tsconfig.
   "@/*": ["src/app/*"]
 }
 ```
+
+---
+
+## Future Improvements
+
+- Add loading skeletons for a better user experience while fetching data.
+- Include a pagination feature for GitHub repositories.
+- Optimize components for server-side rendering using Next.js APIs like `getServerSideProps`.
 
 ---
 
@@ -138,10 +162,10 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contributing
 
-Feel free to fork the repository and submit a pull request with your changes.
+Contributions are welcome! Fork the repository, make changes, and submit a pull request.
 
 ---
 
 ## Contact
 
-For questions or support, reach out at [your-email@example.com].
+For inquiries, feel free to reach out at [federico@federicoferrante.ca](mailto:federico@federicoferrante.ca).

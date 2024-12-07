@@ -5,22 +5,25 @@ import GitHubProfile from "@/app/components/GitHub/GitHubProfile";
 import GitHubRepo from "@/app/components/GitHub/GitHubRepo";
 
 export default function GitHubPage() {
-  const [data, setData] = useState<{
-    profile: { username: string; bio: string; avatar_url: string };
-    repos: Array<{ id: number; name: string; description: string; url: string }>;
-  } | null>(null);
-
+  const [profile, setProfile] = useState<any>(null);
+  const [repos, setRepos] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchGitHubData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/github");
-        if (!response.ok) throw new Error("Failed to fetch GitHub data");
+        const profileResponse = await fetch("https://api.github.com/users/RicoRF");
+        const reposResponse = await fetch("https://api.github.com/users/RicoRF/repos");
 
-        const result = await response.json();
-        setData(result);
+        if (!profileResponse.ok || !reposResponse.ok)
+          throw new Error("Failed to fetch GitHub data");
+
+        const profileData = await profileResponse.json();
+        const reposData = await reposResponse.json();
+
+        setProfile(profileData);
+        setRepos(reposData);
       } catch (error: any) {
         setError(error.message);
       } finally {
@@ -36,14 +39,13 @@ export default function GitHubPage() {
 
   return (
     <div>
-      <h1>GitHub Data</h1>
-      {data && (
-        <>
-          <GitHubProfile profile={data.profile} />
-          {data.repos.map((repo) => (
-            <GitHubRepo key={repo.id} repo={repo} />
-          ))}
-        </>
+      <h1>GitHub Profile and Repositories</h1>
+      {profile && <GitHubProfile profile={profile} />}
+      <h2 style={{ marginTop: "20px" }}>Repositories</h2>
+      {repos.length > 0 ? (
+        repos.map((repo) => <GitHubRepo key={repo.id} repo={repo} />)
+      ) : (
+        <p>No repositories found.</p>
       )}
     </div>
   );
